@@ -60,6 +60,11 @@ CREATE TABLE IF NOT EXISTS volunteers (
 );
 
 -- Default admin account (password: Admin@1234)
-INSERT INTO users (full_name, email, password, role) VALUES
-('Admin User', 'admin@dmdfoodbank.org', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin')
-ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO users (full_name, email, password, role)
+VALUES
+('Admin User', 'admin@dmdfoodbank.org', '$2y$10$A1jYaxZl1PMLT0agcLh8yONkiwjXXOuiBEc7Oh.hHZFKw.y2Nw6SK', 'admin')
+ON DUPLICATE KEY UPDATE
+    full_name = VALUES(full_name),
+    password = VALUES(password),
+    role = VALUES(role),
+    is_active = 1;
